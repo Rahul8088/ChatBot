@@ -65,6 +65,19 @@ def assistant(command):
       if 'quora' in command:
         webbrowser.open('www.quora.com')
         say('Done!')
+        
+      if 'facebook' in command:
+        webbrowser.open('www.facebook.com')
+        say('Done!')
+
+      if 'reddit' in command:
+         reg_ex = re.search('open reddit (.*)', command)
+         url = 'https://www.reddit.com/'
+         if reg_ex:
+            subreddit = reg_ex.group(1)
+            url = url + 'r/' + subreddit
+         webbrowser.open(url)
+         say('Done!')
 
       if '.com' in command:
         sf=re.split('\\bopen \\b',command)[-1]
