@@ -45,7 +45,11 @@ def reflect(fragment):
  
 def analyze(statement):
     ''' Write code which matches responses with all patterns given'''
-
+    for pattern, responses in psychobabble:
+    match = re.match(pattern, statement.rstrip(".!"))
+    if match:
+        response = random.choice(responses)
+        return response.format(*[reflect(g) for g in match.groups()])
 
 
 
