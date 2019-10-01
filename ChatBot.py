@@ -34,6 +34,24 @@ def say(audio):
 
 def myCommand():
     "listens for commands"
+     r = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        print('Ready...')
+        r.pause_threshold = 1
+        r.adjust_for_ambient_noise(source, duration=1)
+        audio = r.listen(source)
+
+    try:
+        command = r.recognize_google(audio).lower()
+        print('You said: ' + command + '\n')
+
+    #loop back to continue to listen for commands if unrecognizable speech is received
+    except sr.UnknownValueError:
+        print('Your last command couldn\'t be heard')
+        command = myCommand();
+
+    return command
 
 def reflect(fragment):
     tokens = fragment.lower().split()
@@ -45,7 +63,7 @@ def reflect(fragment):
  
 def analyze(statement):
     ''' Write code which matches responses with all patterns given'''
-
+    
 
 
 
